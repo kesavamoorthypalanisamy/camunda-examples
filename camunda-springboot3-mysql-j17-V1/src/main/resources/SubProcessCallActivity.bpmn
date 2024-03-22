@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_15lhyuc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.21.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="subProcessCallActivity" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="#{callActivityStartEvent}" event="end">
+          <camunda:field name="injField1">
+            <camunda:string>Test_field_Inject</camunda:string>
+          </camunda:field>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_0iuyzv8</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:callActivity id="Activity_0c27pgx" name="execute sub process" calledElement="subProcess1">
+      <bpmn:extensionElements>
+        <camunda:in sourceExpression="${execution.getVariable(&#39;DocList&#39;)}" target="SubDocList" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0iuyzv8</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ymrlbu</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:sequenceFlow id="Flow_0iuyzv8" sourceRef="StartEvent_1" targetRef="Activity_0c27pgx" />
+    <bpmn:endEvent id="Event_1f3ti44">
+      <bpmn:incoming>Flow_1ymrlbu</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1ymrlbu" sourceRef="Activity_0c27pgx" targetRef="Event_1f3ti44" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="subProcessCallActivity">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_16d70r8_di" bpmnElement="Activity_0c27pgx">
+        <dc:Bounds x="260" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1f3ti44_di" bpmnElement="Event_1f3ti44">
+        <dc:Bounds x="432" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0iuyzv8_di" bpmnElement="Flow_0iuyzv8">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="260" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ymrlbu_di" bpmnElement="Flow_1ymrlbu">
+        <di:waypoint x="360" y="120" />
+        <di:waypoint x="432" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
