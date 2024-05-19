@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0in2ykw" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.21.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0in2ykw" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.23.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
   <bpmn:process id="sample_EventBasedGateway" isExecutable="true">
-    <bpmn:startEvent id="StartEvent_1">
-      <bpmn:outgoing>Flow_0fxjjmi</bpmn:outgoing>
-    </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_0fxjjmi" sourceRef="StartEvent_1" targetRef="Gateway_05onczu" />
     <bpmn:eventBasedGateway id="Gateway_05onczu">
       <bpmn:incoming>Flow_0fxjjmi</bpmn:incoming>
@@ -58,14 +55,16 @@
       <bpmn:incoming>Flow_1gbejga</bpmn:incoming>
       <bpmn:outgoing>Flow_1lfj2wi</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:startEvent id="StartEvent_1" name="start_event_gateway">
+      <bpmn:outgoing>Flow_0fxjjmi</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0elz08k" messageRef="Message_0g00r65" />
+    </bpmn:startEvent>
   </bpmn:process>
   <bpmn:message id="Message_3ls5mbi" name="msg_approve" />
   <bpmn:message id="Message_2d5e36s" name="msg_reject" />
+  <bpmn:message id="Message_0g00r65" name="start_event_gateway" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="sample_EventBasedGateway">
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="152" y="102" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_124loxu_di" bpmnElement="Gateway_05onczu">
         <dc:Bounds x="245" y="95" width="50" height="50" />
       </bpmndi:BPMNShape>
@@ -107,6 +106,12 @@
       <bpmndi:BPMNShape id="Activity_1rgfw78_di" bpmnElement="Activity_0duh74t">
         <dc:Bounds x="450" y="300" width="100" height="80" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1yg7pti_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="129" y="145" width="83" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0fxjjmi_di" bpmnElement="Flow_0fxjjmi">
         <di:waypoint x="188" y="120" />
