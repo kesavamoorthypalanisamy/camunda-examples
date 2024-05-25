@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.23.0">
+  <bpmn:process id="my-project-1-process" name="my-project-1-process" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_1fp17al</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1fp17al" sourceRef="StartEvent_1" targetRef="say-hello" />
+    <bpmn:userTask id="say-hello" name="Say hello to&#10;admin" camunda:candidateUsers="admin">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="assignPerson" label="asignPerson" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1fp17al</bpmn:incoming>
+      <bpmn:outgoing>Flow_1g9uuct</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1g9uuct" sourceRef="say-hello" targetRef="serviceTask1" />
+    <bpmn:serviceTask id="serviceTask1" name="Simple service task" camunda:expression="${1==1}">
+      <bpmn:incoming>Flow_1g9uuct</bpmn:incoming>
+      <bpmn:outgoing>Flow_0u9kh67</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0u9kh67" sourceRef="serviceTask1" targetRef="userTask2" />
+    <bpmn:userTask id="userTask2" name="User task 2" camunda:assignee="${assignPerson}">
+      <bpmn:incoming>Flow_0u9kh67</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xlbo2m</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="endEvent">
+      <bpmn:incoming>Flow_0xlbo2m</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0xlbo2m" sourceRef="userTask2" targetRef="endEvent" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="my-project-1-process">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_08mft2c_di" bpmnElement="say-hello">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0kzp6v1_di" bpmnElement="serviceTask1">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nk2gib_di" bpmnElement="userTask2">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1jwmkm2_di" bpmnElement="endEvent">
+        <dc:Bounds x="752" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1g9uuct_di" bpmnElement="Flow_1g9uuct">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0u9kh67_di" bpmnElement="Flow_0u9kh67">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xlbo2m_di" bpmnElement="Flow_0xlbo2m">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="752" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

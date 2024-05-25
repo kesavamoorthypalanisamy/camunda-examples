@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  db:
+    image: local-ldap
+    restart: always
+    ports:
+      - 1389:1389
+    environment:
+      - LDAP_ADMIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=adminpassword
