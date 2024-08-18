@@ -8,6 +8,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
 
 camunda.bpm:
+  history-level: none
   admin-user:
     id: demo
     password: demo

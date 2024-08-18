@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1pzduyd" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.8.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1pzduyd" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.23.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:process id="loanprocess" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:extensionElements>
@@ -16,6 +16,9 @@
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_1dopjbk" sourceRef="StartEvent_1" targetRef="eligibilityCheck" />
     <bpmn:serviceTask id="eligibilityCheck" name="Eligibility Check" camunda:type="external" camunda:topic="eligibilityCheck">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="#{eligibilityCheck}" event="end" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1dopjbk</bpmn:incoming>
       <bpmn:outgoing>Flow_0br9by6</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -31,18 +34,6 @@
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="loanprocess">
-      <bpmndi:BPMNEdge id="Flow_1dopjbk_di" bpmnElement="Flow_1dopjbk">
-        <di:waypoint x="215" y="117" />
-        <di:waypoint x="270" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_022e4gu_di" bpmnElement="Flow_022e4gu">
-        <di:waypoint x="600" y="117" />
-        <di:waypoint x="792" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0br9by6_di" bpmnElement="Flow_0br9by6">
-        <di:waypoint x="370" y="117" />
-        <di:waypoint x="500" y="117" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -55,6 +46,18 @@
       <bpmndi:BPMNShape id="Event_14psm6n_di" bpmnElement="Event_14psm6n">
         <dc:Bounds x="792" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1dopjbk_di" bpmnElement="Flow_1dopjbk">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_022e4gu_di" bpmnElement="Flow_022e4gu">
+        <di:waypoint x="600" y="117" />
+        <di:waypoint x="792" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0br9by6_di" bpmnElement="Flow_0br9by6">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="500" y="117" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
